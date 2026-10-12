@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: yangchuangzhixun
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python agent_server.py
+    healthCheckPath: /health
+    envVars:
+      - key: LLM_API_KEY
+        sync: false
+      - key: LLM_BASE_URL
+        value: https://api.deepseek.com
+      - key: LLM_MODEL
+        value: deepseek-v4-pro
+      - key: RATE_LIMIT_PER_MINUTE
+        value: "10"
