@@ -20,7 +20,7 @@ def model_call(messages,tools=False):
     if not KEY or not MODEL:raise ValueError('尚未配置服务端模型与密钥')
     if not BASE.startswith('https://'):raise ValueError('模型服务地址需要 HTTPS')
     body={'model':MODEL,'messages':messages}
-    if tools:body.update(tools=[TOOL],tool_choice={'type':'function','function':{'name':'analyze_venture'}})
+    if tools:body.update(tools=[TOOL],tool_choice='auto')
     req=urllib.request.Request(BASE+'/chat/completions',data=json.dumps(body).encode(),headers={'Content-Type':'application/json','Authorization':'Bearer '+KEY},method='POST')
     try:
         with urllib.request.urlopen(req,timeout=90) as r:result=json.loads(r.read(2_000_000))
