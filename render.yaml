@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: yangchuangzhixun
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python server.py
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: HOST
+        value: 0.0.0.0
+      - key: LLM_API_MODE
+        value: chat_completions
+      - key: LLM_BASE_URL
+        value: https://api.deepseek.com
+      - key: LLM_API_KEY
+        sync: false
+      - key: LLM_MODEL
+        sync: false
+      - key: LLM_JSON_MODE
+        value: "true"
+      - key: LLM_MAX_OUTPUT_TOKENS
+        value: "12000"
+      - key: LLM_TIMEOUT_SECONDS
+        value: "60"
+      - key: LLM_QA_MAX_OUTPUT_TOKENS
+        value: "2048"
+      - key: LLM_REASONING_EFFORT
+        value: auto
+      - key: AGNES_API_KEY
+        sync: false
+      - key: AGNES_BASE_URL
+        value: https://apihub.agnes-ai.com/v1
+      - key: AGNES_IMAGE_MODEL
+        value: agnes-image-2.0-flash
